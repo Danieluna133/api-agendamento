@@ -1,0 +1,32 @@
+package com.daniel.agendamento.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.time.LocalTime;
+
+@Entity
+@Table(name = "horario_trabalho")
+@Getter
+@Setter
+@NoArgsConstructor
+public class HorarioTrabalho {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "profissional_id")
+    private Profissional profissional;
+
+    @Column(name = "dia_semana", nullable = false)
+    private Integer diaSemana;
+
+    @Column(name = "hora_inicio", nullable = false)
+    private LocalTime horaInicio;
+
+    @Column(name = "hora_fim", nullable = false)
+    private LocalTime horaFim;
+}
